@@ -1,0 +1,102 @@
+body { 
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a202c;
+    color: #ffffff;
+    font-family: sans-serif;
+    padding: 2rem;
+}
+
+/* Login container styling */
+.login-container {
+    background-color: #2d3748;  /* dark slate */
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+    width: 100%;
+    max-width: 400px;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center children horizontally */
+}
+
+.login-container:hover {
+    transform: translateY(-5px);
+}
+
+/* Form elements styling */
+h1 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+.form-group {
+    width: 100%; /* Ensure form groups take full width */
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #a0aec0; /* lighter gray */
+    font-weight: 600;
+}
+
+input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #4a5568; /* medium gray-blue */
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    background-color: #1a202c;
+    color: #e2e8f0; /* light gray text */
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+input::placeholder {
+    color: #718096; /* placeholder color */
+}
+
+input:focus {
+    outline: none;
+    border-color: #4ade80; /* green accent */
+    background-color: #2d3748;
+    box-shadow: 0 0 8px #4ade80aa;
+    color: #fff;
+}
+
+button {
+    width: 100%;
+    padding: 1rem;
+    background-color: #4ade80; /* green accent */
+    color: #1a202c;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #22c55e;
+}
+
+/* Error message styling */
+.error-message {
+    color: #fed7d7; /* light red text */
+    background-color: #742a2a; /* dark red background */
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    border: 1px solid #feb2b2;
+    width: 100%; /* Ensure error message takes full width */
+}
+

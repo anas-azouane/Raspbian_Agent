@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Real-Time Detection Output</title>
+  <link rel="stylesheet" href="../static/css/style2.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="top-bar">
+      <h1>Real-Time Detection Output</h1>
+      <a href="/dashboard" class="btn-back">← Back to Dashboard</a>
+    </div>
+
+    <div class="stream-container">
+      <!-- First Webcam Stream -->
+      <div class="stream-box">
+        <div class="stream-title">Webcam Stream 1</div>
+        <canvas id="video1"></canvas>
+      </div>
+
+      <!-- Second Webcam Stream -->
+      <div class="stream-box">
+        <div class="stream-title">Webcam Stream 2</div>
+        <canvas id="video2"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function setupWebSocket(canvasId, wsUrl) {
+      const canvas = document.getElementById(canvasId);
+      const ctx = canvas.getContext('2d');
+
+      const ws = new WebSocket(wsUrl);
+
+      ws.binaryType = 'blob'; // ensure binary messages are blobs
+
+      ws.onmessage = function(event) {
+        const blob = event.data instanceof Blob ? event.data : new Blob([event.data], { type: 'image/jpeg' });
+        const img = new Image();
+        img.onload = function() {
+          // Resize canvas to match displayed size
+          canvas.width = canvas.clientWidth;
+          canvas.height = canvas.clientHeight;
+
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          URL.revokeObjectURL(img.src);
+        };
+        img.src = URL.createObjectURL(blob);
+      };
+
+      ws.onclose = function() {
+        console.log(`WebSocket connection to ${wsUrl} closed`);
+      };
+
+      ws.onerror = function(event) {
+        console.error(`WebSocket error on ${wsUrl}`, event);
+      };
+    }
+
+    setupWebSocket('video1', 'ws://localhost:8020/web');
+    setupWebSocket('video2', 'ws://localhost:8020/web1');
+  </script>
+</body>
+</html>
+
